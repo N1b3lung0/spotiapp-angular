@@ -11,6 +11,9 @@ import { ArtistComponent } from './components/artist/artist.component';
 import { SearchComponent } from './components/search/search.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 
+// Pipes
+import { NoimagePipe } from './pipes/noimage.pipe';
+
 import { from } from 'rxjs';
 
 // Routes
@@ -24,7 +27,8 @@ import { ROUTES } from './app.routes';
     HomeComponent,
     ArtistComponent,
     SearchComponent,
-    NavbarComponent
+    NavbarComponent,
+    NoimagePipe
   ],
   imports: [
     BrowserModule,

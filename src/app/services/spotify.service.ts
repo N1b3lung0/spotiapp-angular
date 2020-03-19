@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +11,25 @@ export class SpotifyService {
     console.log('Spotify Service Ready');
   }
 
-  getNewReleases() {
-    const headers = new HttpHeaders({
-      Authorization: 'Bearer BQB_WOg1YDEdW64fNRto79V5jPjG5JDjDGKSBONvBqVcxVQE3mCoeehmMsxGmsWOX7DTqD44YWEAZY75lxs'
+  getQuery( query: string ) {
+
+    const url = `https://api.spotify.com/v1/${ query }`;
+    const headers: HttpHeaders = new HttpHeaders({
+      Authorization: 'Bearer BQBL-ZVF44ZJM_ETSolgJCn_AAI68eEegOYr-LLYxISMN-LeQmB6vm177FH6LdPBv2Go74f1vj4jbBJ2bCQ'
     });
-    return this.http.get('https://api.spotify.com/v1/browse/new-releases', { headers });
+
+    return this.http.get(url, { headers });
+  }
+
+  getNewReleases() {
+
+    return this.getQuery(`browse/new-releases?limit=15`)
+      .pipe( map( (data: any) => data.albums.items) );
   }
 
   getArtist( term: string) {
-    const headers = new HttpHeaders({
-      Authorization: 'Bearer BQB_WOg1YDEdW64fNRto79V5jPjG5JDjDGKSBONvBqVcxVQE3mCoeehmMsxGmsWOX7DTqD44YWEAZY75lxs'
-    });
-    return this.http.get(`https://api.spotify.com/v1/search?q=${ term }&type=artist&limit=15`, { headers });
+
+    return this.getQuery(`search?q=${ term }&type=artist&limit=15`)
+      .pipe( map( (data: any) => data.artists.items ) );
   }
 }
