@@ -16,6 +16,7 @@ import { LoadingComponent } from './components/shared/loading/loading.component'
 
 // Pipes
 import { NoimagePipe } from './pipes/noimage.pipe';
+import { DomseguroPipe } from './pipes/domseguro.pipe';
 
 import { from } from 'rxjs';
 
@@ -32,6 +33,7 @@ import { ROUTES } from './app.routes';
     SearchComponent,
     NavbarComponent,
     NoimagePipe,
+    DomseguroPipe,
     CardsComponent,
     LoadingComponent
   ],
