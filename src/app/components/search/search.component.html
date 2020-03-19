@@ -1,14 +1,8 @@
-<div class="row">
+<div class="row animated fadeIn">
   <div class="col">
     <input #term type="text" (keyup)="buscar(term.value)" class="form-control" placeholder="Search artist ...">
   </div>
 </div>
 
-<div class="card-columns m-5">
-  <div *ngFor="let artist of artists" class="card">
-    <img [src]="artist.images | noimage" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">{{ artist.name }}</h5>
-    </div>
-  </div>
-</div>
+<app-loading class="m-5" *ngIf="loading"></app-loading>
+<app-cards *ngIf="!loading" [items]="artists"></app-cards>
